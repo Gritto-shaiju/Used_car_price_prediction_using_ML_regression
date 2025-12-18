@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Used Car Price Prediction</title>
+  <style>
+    body{
+      margin:0;
+      background:#54a1b5;
+      font-family: Arial, sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .box{
+      background:rgb(129, 187, 198);
+      padding:35px 40px;
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.1);
+      width:380px;
+    }
+    h2{text-align:center;margin-bottom:25px;color:#202020;}
+    label{display:block;margin-top:12px;color:#333;font-size:15px;}
+    input, select{
+      width:100%;
+      padding:10px;
+      margin-top:6px;
+      font-size:15px;
+      border-radius:6px;
+      border:1px solid #aaa;
+      outline:none;
+    }
+    button{
+      margin-top:25px;
+      padding:12px;
+      width:100%;
+      background:#3c6472;
+      color:white;
+      border:none;
+      font-size:17px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>BMW Price Prediction</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+    <label>Car Brand:</label>
+    <select name="car_brand">
+      <option value="{{ car_brand }}">{{ car_brand }}</option>
+      
+    </select>
+
+    <label>Model:</label>
+    <select name="model">
+      <option value="" disabled selected>-- Choose Model --</option>
+        {% for m in model %}
+            <option value="{{ m }}">{{ m }}</option>
+        {% endfor %}
+    </select>
+
+      <label>Year</label>
+      <input type="number" name="year" required>
+    
+    <label>Transmission</label>
+    <select name="transmission">
+      <option value="" disabled selected>-- Choose Transmission --</option>
+        {% for t in transmission %}
+            <option value="{{ t }}">{{ t }}</option>
+        {% endfor %}
+    </select>
+
+      <label>Total run KMs</label>
+      <input type="number" name="mileage" required>
+
+    <label>Fuel Type</label>
+    <select name="fueltype">
+      <option value="" disabled selected>-- Choose Fuel Type --</option>
+        {% for f in fueltype %}
+            <option value="{{ f }}">{{ f }}</option>
+        {% endfor %}
+    </select>
+
+      <label>Tax (£ per year)</label>
+      <input type="number" name="tax" required>
+
+      <label>Miles Per Gallon (MPG)</label>
+      <input type="number" name="miles_per_gallon" required>
+
+    <label>engine size</label>
+    <select name="engine_size">
+      <option value="" disabled selected>-- Choose Engine Size --</option>
+        {% for e in engine_size %}
+            <option value="{{ e }}">{{ e }}</option>
+        {% endfor %}
+    </select>
+
+      <button type="submit">Predict Price</button>
+    </form>
+  </div>
+
+</body>
+</html>

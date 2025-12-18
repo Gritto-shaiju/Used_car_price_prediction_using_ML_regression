@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improved Stylish Form</title>
+
+  <style>
+    body{
+      margin:0;
+      background: linear-gradient(135deg,#07adb9,#023c45);
+      font-family: Arial, sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .box{
+      background:rgb(56, 130, 139);
+      padding:30px 40px;
+      border-radius:15px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.2);
+      width:340px;
+      text-align:center;
+      transition:0.3s;
+    }
+    .box:hover{
+      transform: translateY(-3px);
+      box-shadow:0 16px 40px rgba(0,0,0,0.25);
+    }
+    h2{margin-bottom:22px;color:#333;font-size:22px;letter-spacing:1px;}
+
+    select{
+      width:100%;
+      padding:12px;
+      font-size:15px;
+      border-radius:6px;
+      border:2px solid #ccd3ff;
+      outline:none;
+      transition:0.2s;
+    }
+    select:focus{
+      border-color:#5d7bff;
+      box-shadow:0 0 6px rgba(93,123,255,0.5);
+    }
+
+    button{
+      margin-top:22px;
+      padding:12px 20px;
+      width:100%;
+      background:#0a6174;
+      color:white;
+      border:none;
+      font-size:17px;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.25s;
+    }
+    button:hover{
+      background:#0f3637;
+      transform:scale(1.03);
+    }
+
+    #result{
+      margin-top:18px;
+      font-size:16px;
+      color:#222;
+      font-weight:600;
+      min-height:20px;
+    }
+.styled-select option{
+background:#0a6353;
+padding:10px;
+font-weight:600;
+color:#fff;
+}
+.styled-select option{
+padding:10px;
+font-weight:600;
+color:#fff;
+}
+.styled-select option:hover{
+background:#4c7bff;
+color:white;
+}
+.styled-select:focus{
+border-color:#4c7bff;
+box-shadow:0 0 0 3px rgba(76,123,255,0.35);
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Select the Car Brand</h2>
+    <form method="post" action="{% url 'home' %}">
+        {% csrf_token %}
+        <select id="car_brand" name="car_brand" class="styled-select">
+            <option value="" disabled selected>-- Choose the Car Brand --</option>
+            <option value="Audi">Audi</option>
+            <option value="BMW">BMW</option>
+            <option value="Ford">Ford</option>
+            <option value="Hyundi">Hyundai</option>
+            <option value="Merc">Mercedes</option>
+            <option value="Skoda">Skoda</option>
+            <option value="Toyota">Toyota</option>
+            <option value="VW">Volkswagen</option>
+            <option value="Vauxhall">Vauxhall</option>
+            <!-- <option value="Focus">Focus</option> -->
+            <!-- <option value="Cclass">C-class</option> -->
+        </select>
+
+    <button onclick="showValue()">Let's go</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  
+
+  <script>
+    function showValue(){
+      let select = document.getElementById("car_brand");
+      let result = document.getElementById("result");
+
+      if(select.value === ""){
+        result.innerHTML = "⚠ Please select an option!";
+        result.style.color = "#d10000";
+      } else {
+        result.innerHTML = "✔ You selected: <b>" + select.value + "</b>";
+        result.style.color = "#0a6a00";
+      }
+    }
+  </script>
+
+</body>
+</html>
